@@ -37,24 +37,19 @@ class MoreButton extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            Container(
-              alignment: Alignment.center,
-              width: 40,
-              child: SvgPicture.asset(
-                icon,
-                fit: BoxFit.contain,
-                height: size,
-                width: size,
-                color: iconColor,
-              ),
-            ),
+            // Container(
+            //   alignment: Alignment.center,
+            //   width: 40,
+            //   child: SvgPicture.asset(
+            //     icon,
+            //     fit: BoxFit.contain,
+            //     height: size,
+            //     width: size,
+            //     color: iconColor,
+            //   ),
+            // ),
             const SizedBox(width: 7),
-            Text18w700(
-              text: title,
-              color: textColor ?? MyColors.appMain100,
-            ),
-            const Spacer(),
-            showForwardIcon ? const ForwardIcon() : const Center(),
+            Text("Next"),
           ],
         ),
       ),

@@ -1,5 +1,7 @@
+import 'package:doctovirt/doctorsList/screens/doctors_list_main_screen.dart';
 import 'package:doctovirt/elements/rounded_button.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../elements/custom_card.dart';
 import '../elements/custom_inkwell.dart';
@@ -21,7 +23,7 @@ class _ChooseProfileTypeScreenState extends State<ChooseProfileTypeScreen> {
       body: Padding(
         padding: const EdgeInsets.all(20.0),
         child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-          Spacer(),
+          const Spacer(),
           const Text(
             "Please choose an option",
             style: TextStyle(
@@ -98,7 +100,17 @@ class _ChooseProfileTypeScreenState extends State<ChooseProfileTypeScreen> {
             ),
           ),
           Spacer(),
-          RoundedButton(content: "Next"),
+          RoundedButton(
+            content: "Next",
+            onPressed: () {
+              if (isDoctor == true) {
+                // Go to doctor enter info screen
+
+              } else if (isDoctor == false) {
+                Get.to(() => const DoctorsListMainScreen());
+              }
+            },
+          ),
           const SizedBox(height: 20),
         ]),
       ),
