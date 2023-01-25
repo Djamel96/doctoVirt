@@ -1,6 +1,10 @@
 import 'package:doctovirt/doctorsList/models/doctor.dart';
+import 'package:doctovirt/doctorsList/screens/doctor_profile_details.dart';
 import 'package:doctovirt/elements/custom_card.dart';
+import 'package:doctovirt/elements/custom_inkwell.dart';
+import 'package:doctovirt/elements/forward_icon.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class OneDoctorWidget extends StatelessWidget {
   final Doctor doctor;
@@ -9,10 +13,54 @@ class OneDoctorWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomCardW(
-      margins: EdgeInsets.only(bottom: 8),
+      margins: const EdgeInsets.only(bottom: 8),
       child: Column(children: [
-        Row(
-          children: [Text(doctor.name)],
+        CustomInKWell(
+          onTap: () => Get.to(() => DoctorProfileDetails(
+                doctor: doctor,
+              )),
+          child: Row(
+            children: [
+              Image.asset(
+                doctor.gender == 0
+                    ? "assets/doctor_male_avatar_ph.png"
+                    : "assets/doctor_female_avatar_ph.png",
+                width: 70,
+              ),
+              const SizedBox(width: 12),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      doctor.name,
+                      style: const TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    const SizedBox(height: 4),
+                    Text(
+                      doctor.specialty.name,
+                      style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.grey.shade700),
+                    ),
+                    const SizedBox(height: 4),
+                    Text(
+                      doctor.country,
+                      style: TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.grey.shade600),
+                    ),
+                  ],
+                ),
+              ),
+              const ForwardIcon()
+            ],
+          ),
         )
       ]),
     );

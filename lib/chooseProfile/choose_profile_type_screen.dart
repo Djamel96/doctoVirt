@@ -24,6 +24,8 @@ class _ChooseProfileTypeScreenState extends State<ChooseProfileTypeScreen> {
         padding: const EdgeInsets.all(20.0),
         child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
           const Spacer(),
+          Image.asset("assets/doctoVirt.png"),
+          const Spacer(),
           const Text(
             "Please choose an option",
             style: TextStyle(

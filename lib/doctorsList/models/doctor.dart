@@ -35,6 +35,8 @@ class Doctor {
     required this.phone,
     required this.website,
     required this.specialty,
+    required this.gender,
+    required this.country,
   });
 
   final int id;
@@ -45,6 +47,8 @@ class Doctor {
   final String phone;
   final String website;
   final Specialty specialty;
+  final int gender;
+  final String country;
 
   factory Doctor.fromJson(Map<String, dynamic> json) => Doctor(
         id: json["id"],
@@ -55,6 +59,8 @@ class Doctor {
         phone: json["phone"],
         website: json["website"],
         specialty: Specialty.fromJson(json["specialty"]),
+        gender: json['gender'],
+        country: json['country'],
       );
 
   Map<String, dynamic> toJson() => {
@@ -66,6 +72,8 @@ class Doctor {
         "phone": phone,
         "website": website,
         "specialty": specialty.toJson(),
+        "gender": gender,
+        "country": country,
       };
 }
 
