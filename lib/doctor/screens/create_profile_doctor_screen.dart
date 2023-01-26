@@ -1,3 +1,4 @@
+import 'package:doctovirt/doctor/screens/account_under_review_screen.dart';
 import 'package:doctovirt/elements/custom_card.dart';
 import 'package:doctovirt/elements/rich_text_field.dart';
 import 'package:doctovirt/elements/rounded_button.dart';
@@ -6,6 +7,7 @@ import 'package:doctovirt/helper/keyboard_dismiss.dart';
 import 'package:doctovirt/them/colors.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class CreateProfileDoctorScreen extends StatefulWidget {
   const CreateProfileDoctorScreen({super.key});
@@ -108,6 +110,7 @@ class _CreateProfileDoctorScreenState extends State<CreateProfileDoctorScreen> {
       setState(() {
         loading = true;
       });
+      Get.off(() => const AccountUnderReviewScreen());
     }
   }
 }
