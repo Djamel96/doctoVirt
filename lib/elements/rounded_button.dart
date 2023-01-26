@@ -1,3 +1,4 @@
+import 'package:doctovirt/elements/default_loading.dart';
 import 'package:flutter/material.dart';
 
 import '../them/colors.dart';
@@ -13,6 +14,7 @@ class RoundedButton extends StatelessWidget {
   final List<BoxShadow>? shadow;
   final EdgeInsets? contentPadding;
   final bool active;
+  final bool loading;
   RoundedButton({
     this.width,
     this.height,
@@ -24,6 +26,7 @@ class RoundedButton extends StatelessWidget {
     this.border,
     this.contentPadding,
     this.active = true,
+    this.loading = false,
   });
 
   @override
@@ -66,13 +69,15 @@ class RoundedButton extends StatelessWidget {
                 child: Container(
                   height: height ?? 60,
                   alignment: Alignment.center,
-                  child: Text(
-                    content,
-                    style: const TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w600,
-                        color: Colors.white),
-                  ),
+                  child: loading
+                      ? const Loading()
+                      : Text(
+                          content,
+                          style: const TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w600,
+                              color: Colors.white),
+                        ),
                 ),
               ),
             ),

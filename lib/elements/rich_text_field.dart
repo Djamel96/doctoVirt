@@ -194,8 +194,8 @@ class _RichTextFieldState extends State<RichTextField> {
                             ? InkWell(
                                 child: SvgPicture.asset(
                                   _hidePassword
-                                      ? 'assets/icons/eye_disabled.svg'
-                                      : 'assets/icons/eye.svg',
+                                      ? 'assets/eye_disabled.svg'
+                                      : 'assets/eye.svg',
                                   width: 22,
                                 ),
                                 onTap: () {
@@ -218,8 +218,8 @@ class _RichTextFieldState extends State<RichTextField> {
                         ? InkWell(
                             child: SvgPicture.asset(
                               _hidePassword
-                                  ? 'assets/icons/eye_disabled.svg'
-                                  : 'assets/icons/eye.svg',
+                                  ? 'assets/eye_disabled.svg'
+                                  : 'assets/eye.svg',
                               width: 22,
                             ),
                             onTap: () {
