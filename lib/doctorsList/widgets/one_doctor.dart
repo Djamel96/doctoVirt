@@ -12,14 +12,14 @@ class OneDoctorWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CustomCardW(
-      margins: const EdgeInsets.only(bottom: 8),
-      child: Column(children: [
-        CustomInKWell(
-          onTap: () => Get.to(() => DoctorProfileDetails(
-                doctor: doctor,
-              )),
-          child: Row(
+    return CustomInKWell(
+      onTap: () => Get.to(() => DoctorProfileDetails(
+            doctor: doctor,
+          )),
+      child: CustomCardW(
+        margins: const EdgeInsets.only(bottom: 8),
+        child: Column(children: [
+          Row(
             children: [
               Image.asset(
                 doctor.gender == 0
@@ -61,8 +61,8 @@ class OneDoctorWidget extends StatelessWidget {
               const ForwardIcon()
             ],
           ),
-        )
-      ]),
+        ]),
+      ),
     );
   }
 }

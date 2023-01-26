@@ -43,7 +43,7 @@ class Doctor {
   final String name;
   final String username;
   final String email;
-  final Address address;
+  final Address? address;
   final String phone;
   final String website;
   final Specialty specialty;
@@ -55,9 +55,10 @@ class Doctor {
         name: json["name"],
         username: json["username"],
         email: json["email"],
-        address: Address.fromJson(json["address"]),
-        phone: json["phone"],
-        website: json["website"],
+        address:
+            json["address"] != null ? Address.fromJson(json["address"]) : null,
+        phone: json["phone"] ?? '',
+        website: json["website"] ?? '',
         specialty: Specialty.fromJson(json["specialty"]),
         gender: json['gender'],
         country: json['country'],
@@ -68,7 +69,7 @@ class Doctor {
         "name": name,
         "username": username,
         "email": email,
-        "address": address.toJson(),
+        "address": address?.toJson(),
         "phone": phone,
         "website": website,
         "specialty": specialty.toJson(),

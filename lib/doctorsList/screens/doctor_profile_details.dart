@@ -82,7 +82,7 @@ class _DoctorProfileDetailsState extends State<DoctorProfileDetails> {
               ),
               const SizedBox(height: 20),
               const Text(
-                "You can call him now for a free medical consultation and get advices from him.",
+                "You can request a call now for a free medical consultation and get advices.",
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 16,
@@ -92,7 +92,10 @@ class _DoctorProfileDetailsState extends State<DoctorProfileDetails> {
               const Spacer(
                 flex: 2,
               ),
-              RoundedButton(content: "Call now")
+              RoundedButton(
+                content: "Request a call",
+                onPressed: () {},
+              )
             ],
           ),
         ),

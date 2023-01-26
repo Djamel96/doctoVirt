@@ -1,3 +1,4 @@
+import 'package:doctovirt/doctor/screens/create_profile_doctor_screen.dart';
 import 'package:doctovirt/doctorsList/screens/doctors_list_main_screen.dart';
 import 'package:doctovirt/elements/rounded_button.dart';
 import 'package:flutter/material.dart';
@@ -106,8 +107,7 @@ class _ChooseProfileTypeScreenState extends State<ChooseProfileTypeScreen> {
             content: "Next",
             onPressed: () {
               if (isDoctor == true) {
-                // Go to doctor enter info screen
-
+                Get.to(() => const CreateProfileDoctorScreen());
               } else if (isDoctor == false) {
                 Get.to(() => const DoctorsListMainScreen());
               }
