@@ -1,7 +1,9 @@
 import 'package:doctovirt/doctorsList/models/doctor.dart';
 import 'package:doctovirt/elements/custom_card.dart';
 import 'package:doctovirt/elements/rounded_button.dart';
+import 'package:doctovirt/ongoingCall/ongoing_call_main_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class DoctorProfileDetails extends StatefulWidget {
   final Doctor doctor;
@@ -93,8 +95,10 @@ class _DoctorProfileDetailsState extends State<DoctorProfileDetails> {
                 flex: 2,
               ),
               RoundedButton(
-                content: "Request a call",
-                onPressed: () {},
+                content: "Call now",
+                onPressed: () {
+                  Get.to(() => const OngoingCallMainScreen());
+                },
               )
             ],
           ),

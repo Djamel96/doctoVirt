@@ -1,12 +1,19 @@
 import 'dart:async';
 
 import 'package:agora_rtc_engine/agora_rtc_engine.dart';
+import 'package:doctovirt/elements/custom_inkwell.dart';
+import 'package:doctovirt/them/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 import 'package:permission_handler/permission_handler.dart';
+
+import '../helper/dialogs.dart';
+import 'tool_bar_button.dart';
 
 const appId = "a19e5c0b3cf7470f8435f46442a77b0a";
 const token =
-    "007eJxTYEhfcewQr5xd+I315qf23z5T9Xl1+upA9i/WrasetH65N/OzAkOioWWqabJBknFymrmJuUGahYmxaZqJmYmJUaK5eZJB4umX55MbAhkZtEPdWBkZIBDE52RwyU8uyQ/LLCphYAAAAn0ktw==";
+    "007eJxTYLgRc0jvZp1GaenpObfXae2pimO7sqJ0sdBEjpel/gwXlFQUGBINLVNNkw2SjJPTzE3MDdIsTIxN00zMTEyMEs3NkwwSKzwvJTcEMjI0/tNlYWSAQBCfk8ElP7kkPyyzqISBAQDpgSEH";
 const channel = "DoctoVirt";
 
 class OngoingCallMainScreen extends StatefulWidget {
@@ -20,11 +27,20 @@ class _OngoingCallMainScreenState extends State<OngoingCallMainScreen> {
   int? _remoteUid;
   bool _localUserJoined = false;
   late RtcEngine _engine;
+  bool muted = false;
+  bool cameraActive = true;
+  bool patientCameraActive = true;
 
   @override
   void initState() {
     super.initState();
     initAgora();
+  }
+
+  @override
+  void dispose() {
+    _engine.release();
+    super.dispose();
   }
 
   Future<void> initAgora() async {
@@ -42,22 +58,28 @@ class _OngoingCallMainScreenState extends State<OngoingCallMainScreen> {
       RtcEngineEventHandler(
         onJoinChannelSuccess: (RtcConnection connection, int elapsed) {
           debugPrint("local user ${connection.localUid} joined");
-          setState(() {
-            _localUserJoined = true;
-          });
+          if (mounted) {
+            setState(() {
+              _localUserJoined = true;
+            });
+          }
         },
         onUserJoined: (RtcConnection connection, int remoteUid, int elapsed) {
           debugPrint("remote user $remoteUid joined");
-          setState(() {
-            _remoteUid = remoteUid;
-          });
+          if (mounted) {
+            setState(() {
+              _remoteUid = remoteUid;
+            });
+          }
         },
         onUserOffline: (RtcConnection connection, int remoteUid,
             UserOfflineReasonType reason) {
           debugPrint("remote user $remoteUid left channel");
-          setState(() {
-            _remoteUid = null;
-          });
+          if (mounted) {
+            setState(() {
+              _remoteUid = null;
+            });
+          }
         },
         onTokenPrivilegeWillExpire: (RtcConnection connection, String token) {
           debugPrint(
@@ -78,12 +100,51 @@ class _OngoingCallMainScreenState extends State<OngoingCallMainScreen> {
     );
   }
 
-  // Create UI with local view and remote view
+  void _onToggleMute() {
+    setState(() {
+      muted = !muted;
+    });
+    _engine.muteLocalAudioStream(muted);
+  }
+
+  void _onSwitchCamera() {
+    _engine.switchCamera();
+    setState(() {});
+  }
+
+  _confirmLeave() {
+    showConfimMesage(
+      context,
+      message: "Are you sure you want to end this consultation?",
+      titleText: 'Consultation end',
+      buttonConfirm: 'End',
+    ).then((value) {
+      if (value == 1) _onCallEnd();
+    });
+  }
+
+  _onCallEnd() async {
+    setState(() {
+      _localUserJoined = false;
+      _remoteUid = null;
+    });
+    await _engine.leaveChannel();
+    Get.back();
+  }
+
+  _disableCamera() {
+    setState(() {
+      patientCameraActive = !patientCameraActive;
+    });
+
+    _engine.muteLocalVideoStream(!patientCameraActive);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Agora Video Call'),
+        title: const Text('Video Call'),
       ),
       body: Stack(
         children: [
@@ -92,9 +153,10 @@ class _OngoingCallMainScreenState extends State<OngoingCallMainScreen> {
           ),
           Align(
             alignment: Alignment.topLeft,
-            child: SizedBox(
+            child: Container(
               width: 100,
               height: 150,
+              margin: EdgeInsets.all(12),
               child: Center(
                 child: _localUserJoined
                     ? AgoraVideoView(
@@ -107,6 +169,64 @@ class _OngoingCallMainScreenState extends State<OngoingCallMainScreen> {
               ),
             ),
           ),
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: Container(
+              color: Colors.white,
+              padding: const EdgeInsets.all(30),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  ToolBarButton(
+                    onTap: () {
+                      _onToggleMute();
+                    },
+                    child: Icon(
+                      muted ? Icons.mic_off : Icons.mic,
+                      color: muted
+                          ? const Color(0xff444444)
+                          : AppColors.appMain100,
+                      size: 30,
+                    ),
+                  ),
+                  const SizedBox(width: 12),
+                  ToolBarButton(
+                    onTap: () {
+                      _onSwitchCamera();
+                    },
+                    child: const Icon(
+                      Icons.switch_camera_outlined,
+                      color: AppColors.appMain100,
+                      size: 30,
+                    ),
+                  ),
+                  const SizedBox(width: 12),
+                  ToolBarButton(
+                    onTap: () {
+                      _disableCamera();
+                    },
+                    child: Icon(
+                      patientCameraActive ? Icons.videocam : Icons.videocam_off,
+                      color: patientCameraActive
+                          ? AppColors.appMain100
+                          : const Color(0xff444444),
+                      size: 30,
+                    ),
+                  ),
+                  const SizedBox(width: 12),
+                  ToolBarButton(
+                    onTap: () {
+                      _confirmLeave();
+                    },
+                    child: SvgPicture.asset(
+                      'assets/phone.svg',
+                      color: AppColors.red235,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          )
         ],
       ),
     );
@@ -123,9 +243,23 @@ class _OngoingCallMainScreenState extends State<OngoingCallMainScreen> {
         ),
       );
     } else {
-      return const Text(
-        'Please wait for remote user to join',
-        textAlign: TextAlign.center,
+      return Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Image.asset(
+            "assets/doctoVirt.png",
+            width: 220,
+          ),
+          const SizedBox(height: 20),
+          const Text(
+            'Please wait for remote user to join',
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.w400,
+            ),
+          ),
+        ],
       );
     }
   }

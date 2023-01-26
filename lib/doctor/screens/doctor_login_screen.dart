@@ -10,6 +10,7 @@ import 'package:get/get.dart';
 
 import '../../helper/keyboard_dismiss.dart';
 import 'create_profile_doctor_screen.dart';
+import 'patient_request_screen.dart';
 
 class DoctorLoginScreen extends StatefulWidget {
   const DoctorLoginScreen({super.key});
@@ -79,6 +80,12 @@ class _DoctorLoginScreenState extends State<DoctorLoginScreen> {
                     label: "Password",
                     controller: passwordController,
                     obscureText: true,
+                    validator: (value) {
+                      if (value?.isEmpty ?? true) {
+                        return "Please enter the password";
+                      }
+                      return null;
+                    },
                   ),
                   const SizedBox(height: 30),
                   RoundedButton(
@@ -115,6 +122,9 @@ class _DoctorLoginScreenState extends State<DoctorLoginScreen> {
     if (!loading && form!.validate()) {
       setState(() {
         loading = true;
+      });
+      Future.delayed(const Duration(seconds: 2)).then((value) {
+        Get.to(() => const PatientRequestScreen());
       });
     }
   }

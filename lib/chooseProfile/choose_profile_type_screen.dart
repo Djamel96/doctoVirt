@@ -2,6 +2,7 @@ import 'package:doctovirt/doctor/screens/create_profile_doctor_screen.dart';
 import 'package:doctovirt/doctor/screens/doctor_login_screen.dart';
 import 'package:doctovirt/doctorsList/screens/doctors_list_main_screen.dart';
 import 'package:doctovirt/elements/rounded_button.dart';
+import 'package:doctovirt/them/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -50,7 +51,7 @@ class _ChooseProfileTypeScreenState extends State<ChooseProfileTypeScreen> {
                       isDoctor == false
                           ? const Icon(
                               Icons.check_circle,
-                              color: Colors.green,
+                              color: AppColors.appMain100,
                             )
                           : const Icon(
                               Icons.circle_outlined,
@@ -84,7 +85,7 @@ class _ChooseProfileTypeScreenState extends State<ChooseProfileTypeScreen> {
                       isDoctor == true
                           ? const Icon(
                               Icons.check_circle,
-                              color: Colors.green,
+                              color: AppColors.appMain100,
                             )
                           : const Icon(
                               Icons.circle_outlined,
@@ -106,6 +107,7 @@ class _ChooseProfileTypeScreenState extends State<ChooseProfileTypeScreen> {
           const Spacer(),
           RoundedButton(
             content: "Next",
+            active: isDoctor != null,
             onPressed: () {
               if (isDoctor == true) {
                 Get.to(() => const DoctorLoginScreen());
