@@ -18,7 +18,7 @@ class _PatientRequestScreenState extends State<PatientRequestScreen> {
       ),
       body: ListView(
         padding: const EdgeInsets.all(20),
-        children: [const OnePatientRequestWidget()],
+        children: [OnePatientRequestWidget()],
       ),
     );
   }
