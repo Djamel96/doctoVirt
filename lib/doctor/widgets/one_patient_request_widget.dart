@@ -2,13 +2,22 @@ import 'package:doctovirt/elements/custom_card.dart';
 import 'package:doctovirt/elements/custom_inkwell.dart';
 import 'package:doctovirt/elements/forward_icon.dart';
 import 'package:doctovirt/elements/rounded_button.dart';
-import 'package:doctovirt/ongoingCall/ongoing_call_main_screen.dart';
+import 'package:doctovirt/helper/dialogs.dart';
+import 'package:doctovirt/ongoingCall/screens/ongoing_call_main_screen.dart';
+import 'package:doctovirt/ongoingCall/services/get_agora_token.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class OnePatientRequestWidget extends StatelessWidget {
+class OnePatientRequestWidget extends StatefulWidget {
   const OnePatientRequestWidget({super.key});
 
+  @override
+  State<OnePatientRequestWidget> createState() =>
+      _OnePatientRequestWidgetState();
+}
+
+class _OnePatientRequestWidgetState extends State<OnePatientRequestWidget> {
+  bool isJoining = false;
   @override
   Widget build(BuildContext context) {
     return CustomCardW(
@@ -44,11 +53,35 @@ class OnePatientRequestWidget extends StatelessWidget {
           RoundedButton(
             content: "Join Call",
             width: 140,
-            onPressed: () => Get.to(() => const OngoingCallMainScreen()),
+            onPressed: () {
+              _join();
+            },
+            loading: isJoining,
           )
         ],
       ),
     );
-    ;
+  }
+
+  _join() {
+    if (isJoining) return;
+    setState(() {
+      isJoining = true;
+    });
+    getAgoraToken().then((value) {
+      if (mounted) {
+        setState(() {
+          isJoining = false;
+        });
+        if (value.success) {
+          Get.to(() => OngoingCallMainScreen(
+                token: value.value,
+              ));
+        } else {
+          showConfimMesage(context,
+              buttonConfirm: 'Ok', message: "Can't join now.\n Try later");
+        }
+      }
+    });
   }
 }

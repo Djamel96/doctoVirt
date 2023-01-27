@@ -3,7 +3,6 @@ import 'package:doctovirt/elements/custom_card.dart';
 import 'package:doctovirt/elements/custom_inkwell.dart';
 import 'package:doctovirt/elements/rich_text_field.dart';
 import 'package:doctovirt/elements/rounded_button.dart';
-import 'package:doctovirt/them/colors.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';

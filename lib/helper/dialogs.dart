@@ -17,6 +17,7 @@ Future<int?> showConfimMesage(context,
         onConfirm: () => Navigator.pop(context, 1),
         confirmColor: Color(0xffff6d5f),
         indicatorColor: Color(0xffff6d5f),
+        confirmText: buttonConfirm,
       );
     },
   );

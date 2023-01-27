@@ -1,10 +1,12 @@
 import 'package:doctovirt/doctorsList/models/doctor.dart';
 import 'package:doctovirt/elements/custom_card.dart';
 import 'package:doctovirt/elements/rounded_button.dart';
-import 'package:doctovirt/ongoingCall/ongoing_call_main_screen.dart';
+import 'package:doctovirt/ongoingCall/screens/ongoing_call_main_screen.dart';
+import 'package:doctovirt/ongoingCall/services/get_agora_token.dart';
 import 'package:doctovirt/them/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get/get_connect/http/src/utils/utils.dart';
 
 import '../../helper/dialogs.dart';
 
@@ -17,6 +19,7 @@ class DoctorProfileDetails extends StatefulWidget {
 }
 
 class _DoctorProfileDetailsState extends State<DoctorProfileDetails> {
+  bool isJoining = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -126,7 +129,7 @@ class _DoctorProfileDetailsState extends State<DoctorProfileDetails> {
                           widget.doctor.hasFree ? "Call now" : "Pay and Call",
                       onPressed: () {
                         if (widget.doctor.hasFree) {
-                          Get.to(() => const OngoingCallMainScreen());
+                          _join();
                         } else {
                           showConfimMesage(context,
                               buttonConfirm: 'Ok',
@@ -134,11 +137,34 @@ class _DoctorProfileDetailsState extends State<DoctorProfileDetails> {
                                   'Paid consultation coming soon.\nStay tuned !');
                         }
                       },
+                      loading: isJoining,
                     ),
             ],
           ),
         ),
       ),
     );
+  }
+
+  _join() {
+    if (isJoining) return;
+    setState(() {
+      isJoining = true;
+    });
+    getAgoraToken().then((value) {
+      if (mounted) {
+        setState(() {
+          isJoining = false;
+        });
+        if (value.success) {
+          Get.to(() => OngoingCallMainScreen(
+                token: value.value,
+              ));
+        } else {
+          showConfimMesage(context,
+              buttonConfirm: 'Ok', message: "Can't join now.\n Try later");
+        }
+      }
+    });
   }
 }

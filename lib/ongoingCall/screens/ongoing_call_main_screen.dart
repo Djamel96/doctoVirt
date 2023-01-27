@@ -8,16 +8,16 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:permission_handler/permission_handler.dart';
 
-import '../helper/dialogs.dart';
-import 'tool_bar_button.dart';
+import '../../helper/dialogs.dart';
+import '../widgets/tool_bar_button.dart';
 
 const appId = "a19e5c0b3cf7470f8435f46442a77b0a";
-const token =
-    "007eJxTYLgRc0jvZp1GaenpObfXae2pimO7sqJ0sdBEjpel/gwXlFQUGBINLVNNkw2SjJPTzE3MDdIsTIxN00zMTEyMEs3NkwwSKzwvJTcEMjI0/tNlYWSAQBCfk8ElP7kkPyyzqISBAQDpgSEH";
 const channel = "DoctoVirt";
 
 class OngoingCallMainScreen extends StatefulWidget {
-  const OngoingCallMainScreen({Key? key}) : super(key: key);
+  final String token;
+  const OngoingCallMainScreen({Key? key, required this.token})
+      : super(key: key);
 
   @override
   State<OngoingCallMainScreen> createState() => _OngoingCallMainScreenState();
@@ -93,7 +93,7 @@ class _OngoingCallMainScreenState extends State<OngoingCallMainScreen> {
     await _engine.startPreview();
 
     await _engine.joinChannel(
-      token: token,
+      token: widget.token,
       channelId: channel,
       uid: 0,
       options: const ChannelMediaOptions(),
@@ -137,7 +137,7 @@ class _OngoingCallMainScreenState extends State<OngoingCallMainScreen> {
       patientCameraActive = !patientCameraActive;
     });
 
-    _engine.muteLocalVideoStream(!patientCameraActive);
+    _engine.enableLocalVideo(!patientCameraActive);
   }
 
   @override
@@ -156,7 +156,7 @@ class _OngoingCallMainScreenState extends State<OngoingCallMainScreen> {
             child: Container(
               width: 100,
               height: 150,
-              margin: EdgeInsets.all(12),
+              margin: const EdgeInsets.all(12),
               child: Center(
                 child: _localUserJoined
                     ? AgoraVideoView(
