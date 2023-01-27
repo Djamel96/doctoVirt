@@ -1,3 +1,4 @@
+import 'package:doctovirt/doctor/services/login_service.dart';
 import 'package:doctovirt/elements/custom_card.dart';
 import 'package:doctovirt/elements/custom_inkwell.dart';
 import 'package:doctovirt/elements/rich_text_field.dart';
@@ -123,7 +124,8 @@ class _DoctorLoginScreenState extends State<DoctorLoginScreen> {
       setState(() {
         loading = true;
       });
-      Future.delayed(const Duration(seconds: 2)).then((value) {
+      login(email: emailController.text, password: passwordController.text)
+          .then((value) {
         Get.to(() => const PatientRequestScreen());
       });
     }

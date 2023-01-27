@@ -2,8 +2,11 @@ import 'package:doctovirt/doctorsList/models/doctor.dart';
 import 'package:doctovirt/elements/custom_card.dart';
 import 'package:doctovirt/elements/rounded_button.dart';
 import 'package:doctovirt/ongoingCall/ongoing_call_main_screen.dart';
+import 'package:doctovirt/them/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
+import '../../helper/dialogs.dart';
 
 class DoctorProfileDetails extends StatefulWidget {
   final Doctor doctor;
@@ -75,31 +78,63 @@ class _DoctorProfileDetailsState extends State<DoctorProfileDetails> {
               const Spacer(
                 flex: 2,
               ),
-              const Text(
-                "This doctor accepts free consultancy",
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
+              widget.doctor.hasFree
+                  ? const Text(
+                      "This doctor accepts free consultancy",
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500,
+                        color: AppColors.appMain100,
+                      ),
+                    )
+                  : Text(
+                      "This doctor accept paid consultancy",
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500,
+                        color: AppColors.blue62,
+                      ),
+                    ),
               const SizedBox(height: 20),
-              const Text(
-                "You can request a call now for a free medical consultation and get advices.",
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w400,
-                ),
-              ),
+              widget.doctor.hasFree
+                  ? const Text(
+                      "You can call now for a free medical consultation and get advices.",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w400,
+                      ),
+                    )
+                  : const Text(
+                      "You need to pay this doctor before you call him for a medical consultation and get advices.",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
               const Spacer(
                 flex: 2,
               ),
-              RoundedButton(
-                content: "Call now",
-                onPressed: () {
-                  Get.to(() => const OngoingCallMainScreen());
-                },
-              )
+              !widget.doctor.isActive
+                  ? RoundedButton(
+                      content: "No available for now",
+                      active: false,
+                    )
+                  : RoundedButton(
+                      content:
+                          widget.doctor.hasFree ? "Call now" : "Pay and Call",
+                      onPressed: () {
+                        if (widget.doctor.hasFree) {
+                          Get.to(() => const OngoingCallMainScreen());
+                        } else {
+                          showConfimMesage(context,
+                              buttonConfirm: 'Ok',
+                              message:
+                                  'Paid consultation coming soon.\nStay tuned !');
+                        }
+                      },
+                    ),
             ],
           ),
         ),

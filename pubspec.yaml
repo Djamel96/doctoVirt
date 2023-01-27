@@ -21,7 +21,8 @@ dependencies:
   cupertino_icons: ^1.0.2
   email_validator: ^2.1.17
   flutter_keyboard_visibility: ^5.1.0
-
+  dio: ^4.0.0
+  
 dev_dependencies:
   flutter_test:
     sdk: flutter
