@@ -21,6 +21,7 @@ class OneDoctorWidget extends StatelessWidget {
         margins: const EdgeInsets.only(bottom: 8),
         child: Column(children: [
           Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Image.asset(
                 doctor.gender == 0
@@ -30,59 +31,88 @@ class OneDoctorWidget extends StatelessWidget {
               ),
               const SizedBox(width: 12),
               Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                child: Row(
                   children: [
-                    Text(
-                      doctor.name,
-                      style: const TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w600,
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            doctor.name,
+                            style: const TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                          const SizedBox(height: 4),
+                          Text(
+                            doctor.specialty.name,
+                            style: TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.w500,
+                                color: Colors.grey.shade700),
+                          ),
+                          const SizedBox(height: 4),
+                          Text(
+                            doctor.country,
+                            style: TextStyle(
+                                fontSize: 12,
+                                fontWeight: FontWeight.w500,
+                                color: Colors.grey.shade600),
+                          ),
+                          const SizedBox(height: 3),
+                          Row(
+                            children: [
+                              Icon(
+                                Icons.circle,
+                                size: 13,
+                                color: doctor.isActive
+                                    ? AppColors.appMain100
+                                    : AppColors.grey129,
+                              ),
+                              const SizedBox(width: 4),
+                              Text(
+                                doctor.isActive ? "Available" : "Not Available",
+                                style: TextStyle(
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w500,
+                                  color: doctor.isActive
+                                      ? AppColors.appMain100
+                                      : AppColors.grey129,
+                                ),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 3),
+                          Row(
+                            children: [
+                              Icon(
+                                Icons.attach_money,
+                                size: 13,
+                                color: doctor.hasFree
+                                    ? AppColors.appMain100
+                                    : AppColors.blue62,
+                              ),
+                              const SizedBox(width: 4),
+                              Text(
+                                doctor.hasFree ? "Free calls" : "Paid calls",
+                                style: TextStyle(
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w500,
+                                  color: doctor.hasFree
+                                      ? AppColors.appMain100
+                                      : AppColors.blue62,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
                       ),
                     ),
-                    const SizedBox(height: 4),
-                    Text(
-                      doctor.specialty.name,
-                      style: TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w500,
-                          color: Colors.grey.shade700),
-                    ),
-                    const SizedBox(height: 4),
-                    Text(
-                      doctor.country,
-                      style: TextStyle(
-                          fontSize: 12,
-                          fontWeight: FontWeight.w500,
-                          color: Colors.grey.shade600),
-                    ),
-                    const SizedBox(height: 3),
-                    Row(
-                      children: [
-                        Icon(
-                          Icons.circle,
-                          size: 13,
-                          color: doctor.isActive
-                              ? AppColors.appMain100
-                              : AppColors.grey129,
-                        ),
-                        const SizedBox(width: 4),
-                        Text(
-                          doctor.isActive ? "Available" : "Not Available",
-                          style: TextStyle(
-                            fontSize: 12,
-                            fontWeight: FontWeight.w500,
-                            color: doctor.isActive
-                                ? AppColors.appMain100
-                                : AppColors.grey129,
-                          ),
-                        ),
-                      ],
-                    ),
+                    const ForwardIcon()
                   ],
                 ),
               ),
-              const ForwardIcon()
             ],
           ),
         ]),
