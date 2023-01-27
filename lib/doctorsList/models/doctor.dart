@@ -37,6 +37,8 @@ class Doctor {
     required this.specialty,
     required this.gender,
     required this.country,
+    required this.hasFree,
+    required this.isActive,
   });
 
   final int id;
@@ -49,20 +51,23 @@ class Doctor {
   final Specialty specialty;
   final int gender;
   final String country;
+  final bool isActive;
+  final bool hasFree;
 
   factory Doctor.fromJson(Map<String, dynamic> json) => Doctor(
-        id: json["id"],
-        name: json["name"],
-        username: json["username"],
-        email: json["email"],
-        address:
-            json["address"] != null ? Address.fromJson(json["address"]) : null,
-        phone: json["phone"] ?? '',
-        website: json["website"] ?? '',
-        specialty: Specialty.fromJson(json["specialty"]),
-        gender: json['gender'],
-        country: json['country'],
-      );
+      id: json["id"],
+      name: json["name"],
+      username: json["username"],
+      email: json["email"],
+      address:
+          json["address"] != null ? Address.fromJson(json["address"]) : null,
+      phone: json["phone"] ?? '',
+      website: json["website"] ?? '',
+      specialty: Specialty.fromJson(json["specialty"]),
+      gender: json['gender'],
+      country: json['country'],
+      isActive: json['isActive'],
+      hasFree: json['hasFree']);
 
   Map<String, dynamic> toJson() => {
         "id": id,

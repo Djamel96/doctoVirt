@@ -16,6 +16,8 @@ List doctors = [
     "website": "hildegard.org",
     "specialty": {"name": "Dentist", "id": "1"},
     "country": "USA",
+    "hasFree": true,
+    "isActive": true,
   },
   {
     "id": 2,
@@ -34,6 +36,8 @@ List doctors = [
     "website": "anastasia.net",
     "specialty": {"name": "Chiropractor", "id": "2"},
     "country": "United Kingdom",
+    "hasFree": false,
+    "isActive": true,
   },
   {
     "id": 3,
@@ -52,6 +56,8 @@ List doctors = [
     "website": "ramiro.info",
     "specialty": {"name": "Pediatric cardiology", "id": "3"},
     "country": "France",
+    "hasFree": true,
+    "isActive": false,
   },
   {
     "id": 4,
@@ -70,6 +76,8 @@ List doctors = [
     "website": "kale.biz",
     "specialty": {"name": "Maxillofacial surgeon", "id": "4"},
     "country": "Germany",
+    "hasFree": true,
+    "isActive": true,
   },
   {
     "id": 5,
@@ -88,6 +96,8 @@ List doctors = [
     "website": "demarco.info",
     "specialty": {"name": "Allergist", "id": "5"},
     "country": "USA",
+    "hasFree": false,
+    "isActive": true,
   },
   {
     "id": 6,
@@ -106,6 +116,8 @@ List doctors = [
     "website": "ola.org",
     "specialty": {"name": "Cardiologist", "id": "6"},
     "country": "India",
+    "hasFree": true,
+    "isActive": true,
   },
   {
     "id": 7,
@@ -124,6 +136,8 @@ List doctors = [
     "website": "elvis.io",
     "specialty": {"name": "Audioprosthetist", "id": "7"},
     "country": "China",
+    "hasFree": true,
+    "isActive": false,
   },
   {
     "id": 8,
@@ -142,6 +156,8 @@ List doctors = [
     "website": "jacynthe.com",
     "specialty": {"name": "Chiropractor", "id": "2"},
     "country": "Canada",
+    "hasFree": true,
+    "isActive": true,
   },
   {
     "id": 9,
@@ -160,6 +176,8 @@ List doctors = [
     "website": "conrad.com",
     "specialty": {"name": "Pediatric cardiology", "id": "3"},
     "country": "Germany",
+    "hasFree": false,
+    "isActive": true,
   },
   {
     "id": 10,
@@ -178,5 +196,7 @@ List doctors = [
     "website": "ambrose.net",
     "specialty": {"name": "Maxillofacial surgeon", "id": "4"},
     "country": "India",
+    "hasFree": true,
+    "isActive": false,
   }
 ];
