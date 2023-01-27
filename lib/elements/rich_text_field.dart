@@ -35,7 +35,7 @@ class RichTextField extends StatefulWidget {
   final TextCapitalization textCapitalization;
   final int maxLines;
   final double radius;
-  final String label;
+  final String? label;
 
   RichTextField({
     this.key,
@@ -66,7 +66,7 @@ class RichTextField extends StatefulWidget {
     this.textCapitalization = TextCapitalization.none,
     this.maxLines = 1,
     this.radius = 32,
-    required this.label,
+    this.label,
   });
 
   @override
@@ -111,15 +111,19 @@ class _RichTextFieldState extends State<RichTextField> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        Text(
-          widget.label,
-          style: TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.w500,
-            color: _focus.hasFocus ? AppColors.appMain100 : AppColors.grey129,
+        if (widget.label != null)
+          Padding(
+            padding: const EdgeInsets.only(bottom: 4.0),
+            child: Text(
+              widget.label!,
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w500,
+                color:
+                    _focus.hasFocus ? AppColors.appMain100 : AppColors.grey129,
+              ),
+            ),
           ),
-        ),
-        const SizedBox(height: 4),
         Stack(
           children: <Widget>[
             TextFormField(
