@@ -2,6 +2,8 @@ import 'package:doctovirt/doctorsList/models/doctor.dart';
 import 'package:doctovirt/main_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+/// This class is a helper to store user data to local storage
+///
 class SharedPreferencesHelper {
   static const String _isDoctor = '_isDoctor';
   static const String _me = 'me';

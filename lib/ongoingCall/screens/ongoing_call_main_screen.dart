@@ -11,7 +11,10 @@ import 'package:permission_handler/permission_handler.dart';
 import '../../helper/dialogs.dart';
 import '../widgets/tool_bar_button.dart';
 
+/// The agora app id
 const appId = "a19e5c0b3cf7470f8435f46442a77b0a";
+
+/// The chanel name (Should change in production)
 const channel = "DoctoVirt";
 
 class OngoingCallMainScreen extends StatefulWidget {

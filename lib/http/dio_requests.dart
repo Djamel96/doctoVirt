@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 const int sendTimeOut = 10000;
 const int recieveTimeOut = 20000;
 
+/// This functions allow to get and post data to server
+
 Future<Response?> dioPostFormdata(
     {required String url,
     FormData? formData,

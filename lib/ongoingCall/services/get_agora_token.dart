@@ -6,6 +6,7 @@ import 'package:doctovirt/http/generic_response.dart';
 
 import '../../http/api.dart';
 
+/// Load the agora token from server
 Future<GenericResponse> getAgoraToken() async {
   try {
     Response? response;
@@ -20,7 +21,7 @@ Future<GenericResponse> getAgoraToken() async {
       log(response!.data.toString());
       if (successResponse(response!.statusCode)) {
         return GenericResponse.defaultSuccess(
-          value: response!.data['data']['android_store_link'],
+          value: response!.data['data'],
         );
       }
     }

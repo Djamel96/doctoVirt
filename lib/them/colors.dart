@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+/// This class defines all the colors used in the app
 class AppColors {
   static const Color appMain100 = Color(0xff00D8A0);
   static const Color buttonSplash = Color(0xff03c391);
