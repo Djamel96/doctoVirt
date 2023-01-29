@@ -1,4 +1,4 @@
-# doctovirt
+# Doctovirt Mobile App
 
 DoctoVirt, or Doctor Virtual. Is a mobile application that will connect patients and doctors from all around the world. The doctors first subscribe and get their profile validated, then can choose if they offer free or paid consultations. Patients will use the app to search for a specialized doctor and call him if he is available for online consultation. The app can also be used by not experienced doctors to get mentored by experienced doctors. This will solve a lot of health problems all around the world !
 
