@@ -8,6 +8,10 @@ import '../../http/api.dart';
 
 /// Load the agora token from server
 Future<GenericResponse> getAgoraToken() async {
+  return GenericResponse.defaultSuccess(
+    value:
+        "00685559cb7b6bb4bd9b8725f1fae06a4baIAAnC0RAPe1+hLQqnW29ilh4YYWXtOswrXoepK+Fo0Hv3ZQARWYAAAAAIgCaJasCg/oWZAQAAQADTBhkAwADTBhkAgADTBhkBAADTBhk",
+  );
   try {
     Response? response;
     await dioget(
@@ -21,7 +25,8 @@ Future<GenericResponse> getAgoraToken() async {
       log(response!.data.toString());
       if (successResponse(response!.statusCode)) {
         return GenericResponse.defaultSuccess(
-          value: response!.data['data'],
+          value:
+              "00685559cb7b6bb4bd9b8725f1fae06a4baIAAnC0RAPe1+hLQqnW29ilh4YYWXtOswrXoepK+Fo0Hv3ZQARWYAAAAAIgCaJasCg/oWZAQAAQADTBhkAwADTBhkAgADTBhkBAADTBhk",
         );
       }
     }

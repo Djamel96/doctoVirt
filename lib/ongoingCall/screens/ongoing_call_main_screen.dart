@@ -12,10 +12,10 @@ import '../../helper/dialogs.dart';
 import '../widgets/tool_bar_button.dart';
 
 /// The agora app id
-const appId = "a19e5c0b3cf7470f8435f46442a77b0a";
+const appId = "85559cb7b6bb4bd9b8725f1fae06a4ba";
 
 /// The chanel name (Should change in production)
-const channel = "DoctoVirt";
+const channel = "virtaul-test-1679141085";
 
 class OngoingCallMainScreen extends StatefulWidget {
   final String token;
